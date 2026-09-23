@@ -126,6 +126,8 @@
   }
   .wordmark span{display:inline-block;will-change:transform}
   .wordmark .wm-r{margin-left:-0.04em}
+  body.fx .wordmark{opacity:0;transition:opacity 1.8s ease}
+  body.fx .wordmark.wm-in{opacity:1}
 
   .corner{
     position:absolute;z-index:8;font-size:10.5px;text-transform:uppercase;
@@ -826,6 +828,8 @@ if(!reduceMotion){
   window.addEventListener('scroll', onScrollPortal, {passive:true});
   window.addEventListener('resize', updatePortal);
   updatePortal();
+  // page-load fade-in of the YEWAIN wordmark
+  requestAnimationFrame(()=>requestAnimationFrame(()=>wm.classList.add('wm-in')));
 }
 
 /* ============================================================
