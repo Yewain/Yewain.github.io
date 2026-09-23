@@ -6,7 +6,7 @@
 <title>YEWAIN — Independent Record Label</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700;6..72,800&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700;6..72,800&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root{
     --ground:#0A1A2E;
@@ -125,13 +125,14 @@
     transform:translateY(-50%) scale(1);
   }
   .wordmark span{display:inline-block;will-change:transform}
+  .wordmark .wm-r{margin-left:-0.04em}
 
   .corner{
     position:absolute;z-index:8;font-size:10.5px;text-transform:uppercase;
     letter-spacing:.14em;color:var(--ink-2);
   }
   .corner-tl{top:80px;left:28px}
-  .corner-tr{top:22px;right:28px;text-align:right}
+  .corner-tr{top:22px;right:28px;text-align:right;opacity:0;transition:opacity .6s var(--ease)}
   .corner-bl{bottom:24px;left:28px}
   .corner-br{bottom:24px;right:28px;text-align:right}
   .corner .amber{color:var(--amber)}
@@ -147,7 +148,7 @@
     display:flex;align-items:center;
     padding:140px 28px 100px;
     overflow:hidden;
-    background:#F7F5F0;
+    background:var(--ground);
   }
   .statement-inner{max-width:1280px;margin:0 auto;width:100%;position:relative;z-index:2}
   body.fx .statement-inner .reveal{transform:translateY(46px);transition:opacity 2.4s var(--ease),transform 2.4s var(--ease)}
@@ -159,7 +160,7 @@
   .statement h2{
     font-family:'Newsreader',serif;font-weight:700;
     font-size:clamp(24px,3.6vw,52px);line-height:1.08;letter-spacing:-.02em;
-    max-width:22ch;color:#111;
+    max-width:22ch;color:var(--ink);
   }
   .stmt-role{
     margin-top:20px;font-family:'Sora',sans-serif;font-weight:500;font-style:italic;
@@ -167,21 +168,21 @@
   }
   .stmt-tag{
     margin-top:26px;font-family:'Newsreader',serif;font-weight:500;font-style:italic;
-    font-size:clamp(22px,2.1vw,32px);line-height:1.4;color:#222;max-width:22ch;
+    font-size:clamp(22px,2.1vw,32px);line-height:1.4;color:var(--ink);max-width:22ch;
   }
   .stmt-edu{
     margin-top:30px;font-family:'Sora',sans-serif;font-weight:500;
-    text-transform:uppercase;letter-spacing:.12em;font-size:10px;color:#666;
+    text-transform:uppercase;letter-spacing:.12em;font-size:10px;color:var(--ink-2);
   }
   .stmt-meta{
     margin-top:8px;font-family:'Sora',sans-serif;font-weight:500;
-    text-transform:uppercase;letter-spacing:.12em;font-size:10px;color:#666;
+    text-transform:uppercase;letter-spacing:.12em;font-size:10px;color:var(--ink-2);
   }
   .index-num{
     position:absolute;right:-2vw;top:50%;transform:translateY(-50%);
     font-family:'Newsreader',serif;font-weight:800;font-size:clamp(180px,32vw,440px);
     line-height:1;color:transparent;
-    -webkit-text-stroke:1px rgba(0,0,0,.15);
+    -webkit-text-stroke:1px rgba(237,231,220,.22);
     z-index:0;pointer-events:none;user-select:none;
   }
   .float-img{
@@ -191,75 +192,99 @@
     border:1px solid var(--hair);
   }
 
-  /* ---------- RELEASES ---------- */
-  .releases{
-    padding:120px 28px 140px;border-top:1px solid var(--hair);
+  /* ---------- WORK PIN (scroll-driven floating cards) ---------- */
+  .workpin{position:relative;height:460vh;background:var(--ground)}
+  .work-stage{
+    position:sticky;top:0;height:100vh;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
   }
-  .releases-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-  .releases .label{margin-bottom:24px}
-  .releases h2{
-    font-family:'Newsreader',serif;font-weight:700;
-    font-size:clamp(34px,5vw,72px);letter-spacing:-.025em;line-height:1.02;margin-bottom:24px;
+  .wp-eyebrow{
+    position:absolute;top:34px;left:28px;z-index:4;
+    font-size:10.5px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-2);
   }
-  .lede{color:var(--ink-2);max-width:42ch;margin-bottom:36px}
-  .btn-row{display:flex;gap:14px;flex-wrap:wrap}
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:14px 22px;border:1px solid var(--hair);border-radius:999px;
-    font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;
-    transition:.25s var(--ease);
+  .wp-count{
+    position:absolute;top:34px;right:28px;z-index:4;
+    font-size:10.5px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);
   }
-  .btn:hover{border-color:var(--amber);color:var(--amber)}
-  .btn.solid{background:var(--ink);color:var(--ground);border-color:var(--ink)}
-  .btn.solid:hover{background:var(--amber);border-color:var(--amber);color:var(--ground)}
-  .btn .arr{display:inline-block;transition:transform .25s var(--ease)}
-  .btn:hover .arr{transform:translateX(3px)}
-
-  .deck-wrap{display:flex;flex-direction:column;align-items:center;gap:22px}
-  .deck{
-    position:relative;width:100%;max-width:460px;aspect-ratio:1;
-    border-radius:6px;
+  .wp-label{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:1;
+    font-family:'Newsreader',serif;font-weight:500;line-height:.8;
+    font-size:clamp(56px,9vw,140px);letter-spacing:-.03em;
+    color:rgba(237,231,220,.08);pointer-events:none;user-select:none;white-space:nowrap;
   }
-  .card{
-    position:absolute;inset:0;border-radius:6px;overflow:hidden;
+  .wp-label-l{left:2vw}
+  .wp-label-r{right:2vw}
+  .wp-watermark{
+    position:absolute;bottom:-3vh;left:50%;transform:translateX(-50%);z-index:1;
+    font-family:'Newsreader',serif;font-weight:500;font-size:clamp(90px,20vw,300px);
+    letter-spacing:-.02em;color:rgba(237,231,220,.03);pointer-events:none;white-space:nowrap;
+  }
+  .wp-scene{position:absolute;inset:0;z-index:2;perspective:1400px}
+  .wp-card{
+    position:absolute;left:50%;top:50%;margin:0;
+    width:clamp(190px,26vw,330px);border-radius:14px;overflow:hidden;
+    border:1px solid rgba(255,255,255,.1);
     background:var(--ground-2);
-    box-shadow:0 24px 60px -20px rgba(0,0,0,.7),0 6px 18px -6px rgba(0,0,0,.6);
-    will-change:transform;touch-action:none;cursor:grab;
-    user-select:none;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.85);
+    will-change:transform,opacity;
+    transition:transform .65s cubic-bezier(.22,1,.36,1),opacity .45s ease;
   }
-  .card.dragging{cursor:grabbing}
-  .card .art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
-  .card .scrim{display:none}
-  .card .meta{position:absolute;left:0;right:auto;width:54%;bottom:12px;padding-left:14px}
-  .card .code{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--amber);font-weight:700;margin-bottom:6px}
-  .card .title{font-family:'Newsreader',serif;font-weight:700;font-size:20px;letter-spacing:-.02em;line-height:1.1;text-transform:uppercase}
-  .card .fmt{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-2);margin-top:4px}
-  .deck-hint{display:flex;align-items:center;gap:18px;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
-  .progress-dots{display:flex;gap:7px}
-  .progress-dots i{width:6px;height:6px;border-radius:50%;background:var(--hair);transition:background .25s var(--ease)}
-  .progress-dots i.on{background:var(--amber)}
+  @media (prefers-reduced-motion: reduce){
+    .wp-card{transition:none}
+  }
+  .wp-card img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center}
+  .wp-card.thumb img{object-fit:contain;background:#101826}
+  /* no-JS / pre-JS fallback: first card centered, rest hidden */
+  .wp-card:nth-child(1){transform:translate(-50%,-50%) scale(1)}
+  .wp-card:nth-child(n+2){opacity:0}
+  .wp-caption{
+    position:absolute;left:50%;bottom:3.5vh;transform:translateX(-50%);z-index:3;
+    width:min(620px,88vw);text-align:center;pointer-events:none;
+  }
+  .wp-caption .wp-code{
+    font-size:14px;text-transform:uppercase;letter-spacing:.18em;color:var(--amber);margin-bottom:6px;
+  }
+  .wp-caption h3{
+    font-family:'Newsreader',serif;font-weight:600;
+    font-size:clamp(26px,3.4vw,44px);letter-spacing:-.02em;color:var(--ink);margin-bottom:12px;
+  }
+  .wp-caption p{
+    font-size:14px;line-height:1.65;color:var(--ink-2);max-width:52ch;margin:0 auto;
+  }
+  .wp-caption.switching .wp-code,.wp-caption.switching h3,.wp-caption.switching p{opacity:0;transform:translateY(10px)}
+  .wp-caption .wp-code,.wp-caption h3,.wp-caption p{
+    transition:opacity .3s ease,transform .3s ease;
+  }
+  @media (max-width:760px){
+    .wp-eyebrow{left:18px;top:24px}
+    .wp-count{right:18px;top:24px}
+    .wp-label{font-size:clamp(44px,16vw,90px)}
+    .workpin{height:500vh}
+    .wp-card{width:62vw}
+    .wp-caption{bottom:3.5vh}
+  }
 
   /* ---------- ROSTER + DATES ---------- */
-  .roster{padding:120px 28px 80px;border-top:1px solid rgba(0,0,0,.13);background:#F7F5F0}
+  .roster{padding:120px 28px 80px;border-top:none;background:var(--ground)}
   .roster-inner{max-width:1280px;margin:0 auto}
   .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:24px;flex-wrap:wrap}
-  .section-head h2{font-family:'Newsreader',serif;font-weight:700;font-size:clamp(30px,4.4vw,56px);letter-spacing:-.02em;color:#111}
+  .section-head h2{font-family:'Newsreader',serif;font-weight:700;font-size:clamp(30px,4.4vw,56px);letter-spacing:-.02em;color:var(--ink)}
   .roster-list{list-style:none}
   .roster-row{
     display:grid;grid-template-columns:200px 1fr;gap:28px;
-    padding:30px 0;border-top:1px solid rgba(0,0,0,.13);
+    padding:30px 0;border-top:1px solid var(--hair);
   }
-  .roster-row:last-child{border-bottom:1px solid rgba(0,0,0,.13)}
+  .roster-row:last-child{border-bottom:none}
   .roster-row .tag{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--amber);padding-top:4px}
-  .roster .label{color:#333}
+  .roster .label{color:var(--ink-2)}
   .exp-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-  .roster-row .name{font-family:'Newsreader',serif;font-weight:700;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.02em;color:#111}
-  .roster-row .count{font-family:'Sora',sans-serif;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#666}
+  .roster-row .name{font-family:'Newsreader',serif;font-weight:700;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.02em;color:var(--ink)}
+  .roster-row .count{font-family:'Sora',sans-serif;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2)}
   .exp-bullets{list-style:none;margin:16px 0 0;padding:0}
-  .exp-bullets li{position:relative;padding-left:18px;margin:8px 0;font-size:14px;line-height:1.55;color:#444}
+  .exp-bullets li{position:relative;padding-left:18px;margin:8px 0;font-size:14px;line-height:1.55;color:var(--ink-2)}
   .exp-bullets li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:1px;background:var(--amber)}
 
-  .dates{padding:100px 28px 120px;border-top:1px solid var(--hair)}
+  .dates{padding:100px 28px 120px;border-top:none}
   .dates-inner{max-width:1280px;margin:0 auto}
   .dates table{width:100%;border-collapse:collapse}
   .dates thead th{
@@ -281,19 +306,80 @@
     .dates tbody td:last-child{text-align:left}
   }
 
-  /* ---------- CLOSE ---------- */
-  .close-sec{padding:140px 28px 0;border-top:1px solid var(--hair);text-align:center;overflow:hidden}
-  .close-sec h2{font-family:'Newsreader',serif;font-weight:700;font-size:clamp(34px,5.6vw,84px);letter-spacing:-.025em;line-height:1.04;margin-bottom:24px}
-  .close-sec .fine{color:var(--ink-2);font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;margin-bottom:40px}
-  .close-sec .btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:120px}
-  .close-footer{border-top:1px solid var(--hair);padding:22px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
-  .close-wordmark{
-    font-family:'Newsreader',serif;font-weight:500;font-size:clamp(120px,30vw,420px);
-    letter-spacing:-.02em;line-height:.8;color:var(--ink);
-    transform:translateY(18%);text-align:center;white-space:nowrap;
-    margin-top:40px;
+  /* ---------- CINEMATIC CLOSE ---------- */
+  .cinematic{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    color:#fff;background:hsl(201,100%,13%);overflow:hidden;
   }
-  .close-wordmark .dot{color:var(--amber)}
+  .c-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .c-overlay{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(2,10,24,.55) 0%,rgba(2,10,24,.22) 42%,rgba(2,10,24,.62) 100%),
+      rgba(2,10,24,.2);
+  }
+  /* nav — 3-column distributed */
+  .c-nav{
+    position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;
+    padding:24px 32px;display:grid;grid-template-columns:1fr auto;align-items:center;
+  }
+  .c-brand{font-family:'Instrument Serif',serif;font-size:30px;line-height:1;color:#fff;letter-spacing:.01em}
+  .c-brand sup{font-size:.42em;margin-left:2px;vertical-align:super}
+  .c-links{display:flex;gap:40px;list-style:none;justify-self:end}
+  .c-links a{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,.85);transition:color .2s}
+  .c-links a:hover{color:#fff}
+  /* hero */
+  .c-hero{
+    position:relative;z-index:2;flex:1;width:100%;max-width:1280px;margin:0 auto;
+    padding:60px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  }
+  .c-hero h1{
+    font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:80px;line-height:.95;letter-spacing:-2.46px;color:#fff;
+  }
+  .c-hero h1 em{font-style:normal;color:var(--amber)}
+  .c-hero p{
+    max-width:670px;margin-top:28px;
+    font-family:'Inter',sans-serif;font-size:18px;font-weight:400;line-height:1.625;
+    color:rgba(255,255,255,.82);
+  }
+  .c-cta{
+    display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+    margin-top:48px;border-radius:9999px;cursor:pointer;
+    background:#000;color:#fff;padding:20px 56px;
+    font-family:'Inter',sans-serif;font-size:16px;font-weight:500;
+    transition:transform .2s ease-in-out,background-color .2s,color .2s;
+  }
+  .c-cta:hover{transform:scale(1.03)}
+  .c-cta-row{margin-top:48px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+  .c-cta-row .c-cta{margin-top:0}
+  .c-cta-ghost{
+    background:transparent;color:#fff;
+    border:1px solid rgba(255,255,255,.45);
+  }
+  .c-cta-ghost:hover{background:rgba(255,255,255,.1)}
+  /* footer */
+  .c-footer{
+    position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;
+    padding:22px 32px;border-top:1px solid rgba(255,255,255,.18);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+    font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;
+    text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.6);
+  }
+  /* cinematic entrance — fade-rise .8s ease-out, 200ms stagger */
+  body.fx .cinematic .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease-out,transform .8s ease-out}
+  body.fx .cinematic .reveal.is-in{opacity:1;transform:none}
+  body.fx .cinematic .reveal.d1.is-in{transition-delay:.2s}
+  body.fx .cinematic .reveal.d2.is-in{transition-delay:.4s}
+
+  @media (max-width:760px){
+    .c-nav{grid-template-columns:1fr auto;gap:14px;padding:20px 18px}
+    .c-links{display:none}
+    .c-hero{padding:40px 18px}
+    .c-hero h1{font-size:48px}
+    .c-hero p{font-size:16px}
+    .c-footer{padding:20px 18px;justify-content:center;text-align:center}
+  }
 
   /* ---------- reveals ----------
      Rules are scoped to body.fx — a class added by JS ONLY when
@@ -307,12 +393,11 @@
   body.fx .reveal.d3.is-in{transition-delay:.24s}
 
   @media (prefers-reduced-motion:reduce){
-    .hero-img,.duotone,.panel,.dot,.wordmark,.wordmark span,.float-img{transition:none!important;will-change:auto!important}
+    .hero-img,.duotone,.panel,.dot,.wordmark,.wordmark span,.float-img,.wp-card{transition:none!important;will-change:auto!important}
   }
 
   @media (max-width:860px){
     .nav ul{display:none}
-    .releases-inner{grid-template-columns:1fr;gap:60px}
     .roster-row{grid-template-columns:120px 1fr;gap:14px}
     .corner-tr{top:20px}
   }
@@ -321,7 +406,7 @@
     .nav .pill{display:none}
     .portal{height:220vh}
     .statement{padding:120px 18px 80px}
-    .releases,.roster,.dates,.close-sec{padding-left:18px;padding-right:18px}
+    .roster,.dates,.close-sec{padding-left:18px;padding-right:18px}
     .roster-row{grid-template-columns:1fr;gap:6px}
     .roster-row .count{justify-self:start}
   }
@@ -358,9 +443,9 @@
       <span class="wm-l">YEW</span><span class="wm-r">AIN</span>
     </h1>
 
-    <div class="corner corner-tr">— Personal Curriculum Vitae</div>
-    <div class="corner corner-bl">Communication University<br/>of <span style="color:var(--ink)">China</span></div>
-    <div class="corner corner-br">Beijing<br/><span style="color:var(--ink)">CHINA</span></div>
+    <div class="corner corner-tr" id="corner-tr">PERSONAL CURRICULUM VITAE</div>
+    <div class="corner corner-bl">Communication University of China</div>
+    <div class="corner corner-br">Beijing<br/>China</div>
     <div class="scroll-hint">Scroll to open</div>
   </div>
 </section>
@@ -379,28 +464,21 @@
   </div>
 </section>
 
-<!-- RELEASES -->
-<section class="releases" id="releases">
-  <div class="releases-inner">
-    <div class="copy-col">
-      <p class="label reveal">— Creation</p>
-      <h2 class="reveal d1">The Creation.</h2>
-      <p class="lede reveal d2">Selected releases from my creative practice.<br/>Each record captures a different way of telling a story.</p>
-      <div class="btn-row reveal d3">
-        <a class="btn solid" href="#">View Full Catalogue <span class="arr">→</span></a>
-        <a class="btn" href="#">Press Sheet</a>
-      </div>
-    </div>
+<!-- WORK PIN -->
+<section class="workpin" id="releases">
+  <div class="work-stage">
+    <p class="wp-eyebrow">— Creation · Selected Works</p>
+    <p class="wp-count">2023 — 2026</p>
+    <span class="wp-label wp-label-l" aria-hidden="true">Creation</span>
+    <span class="wp-label wp-label-r" aria-hidden="true">23–26</span>
+    <span class="wp-watermark" aria-hidden="true">YEWAIN</span>
 
-    <div class="deck-wrap reveal d2">
-      <div class="deck" id="deck" tabindex="0" role="group" aria-label="Record catalogue deck, drag or use arrow keys">
-        <!-- cards injected by JS -->
-      </div>
-      <div class="deck-hint">
-        <span>Drag / ← →</span>
-        <div class="progress-dots" id="dots"></div>
-        <span id="counter">01 / 06</span>
-      </div>
+    <div class="wp-scene" id="wpScene"></div>
+
+    <div class="wp-caption" id="wpCaption">
+      <p class="wp-code" id="wpCode"></p>
+      <h3 id="wpTitle"></h3>
+      <p id="wpBrief"></p>
     </div>
   </div>
 </section>
@@ -411,7 +489,7 @@
     <div class="section-head">
       <div>
         <p class="label reveal">— Experience</p>
-        <h2 class="reveal d1">Internship.</h2>
+        <h2 class="reveal d1">Internship</h2>
       </div>
     </div>
     <ul class="roster-list" id="roster-list"></ul>
@@ -424,7 +502,7 @@
     <div class="section-head">
       <div>
         <p class="label reveal">— Others</p>
-        <h2 class="reveal d1">Another activities.</h2>
+        <h2 class="reveal d1">Another activities</h2>
       </div>
       <p class="label reveal d2"></p>
     </div>
@@ -437,33 +515,51 @@
   </div>
 </section>
 
-<!-- CLOSE -->
-<section class="close-sec" id="close">
-  <h2 class="reveal">Press play,<br/>then let it run.</h2>
-  <p class="fine reveal d1">Yewain is artist-owned. We ship worldwide from Beijing.</p>
-  <div class="btns reveal d2">
-    <a class="btn solid" href="#">Join the Mailing <span class="arr">→</span></a>
-    <a class="btn" href="#portal">Back to top</a>
+<!-- CINEMATIC CLOSE -->
+<section class="cinematic" id="close">
+  <video class="c-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="https://designerstephen.github.io/public-assets/videos/serene-art-hero.mp4" type="video/mp4" />
+  </video>
+  <div class="c-overlay"></div>
+
+  <nav class="c-nav">
+    <a class="c-brand" href="#portal">YEWAIN<sup>®</sup></a>
+    <ul class="c-links">
+      <li><a href="#statement">About Me</a></li>
+      <li><a href="#releases">Creation</a></li>
+      <li><a href="#roster">Experience</a></li>
+      <li><a href="#dates">Others</a></li>
+    </ul>
+  </nav>
+
+  <div class="c-hero">
+    <h1 class="reveal">Stay curious.<br/><em>Keep creating.</em></h1>
+    <p class="reveal d1">A Japanese major exploring<br>the intersection of communication, culture, media and creativity.</p>
+    <div class="c-cta-row reveal d2">
+      <a class="c-cta" href="#portal">Back to top</a>
+    </div>
   </div>
-  <div class="close-footer">
-    <span>© Yewain Records MMXXVI</span>
-    <span>Impressum · Privacy · Distribution</span>
+
+  <div class="c-footer">
+    <span>© YEWAIN 2026</span>
+    <span>Communication · Culture · Media · Creation</span>
     <span>Beijing · China</span>
   </div>
-  <div class="close-wordmark" aria-hidden="true">YEWAIN<span class="dot">.</span></div>
 </section>
 
 <script>
 /* ============================================================
    DATA — only the label's own catalogue & dates, internally consistent
    ============================================================ */
-const CATALOGUE = [
-  {code:"No.1", title:"logo design",      fmt:"2024",          art:"amber lit minimal record sleeve pale hours moody", img:"./work1.png"},
-  {code:"No.2", title:"PERSONAL WECHAT EDITORIAL", fmt:"2023", art:"teal and amber abstract record sleeve salt iron", img:"./work2.png"},
-  {code:"No.3", title:"brand promoting", fmt:"2023", art:"warm amber glow choir record sleeve nocturne", img:"./work3.jpg"},
-  {code:"NCT-034", title:"North of Quiet",    fmt:"LP · 180g",  art:"cold blue teal record sleeve north quiet minimal", img:"./work4.png"},
-  {code:"NCT-033", title:"The Long Fade",     fmt:"2×LP",        art:"fading amber horizon record sleeve long fade"},
-  {code:"NCT-032", title:"Roomful of Embers",fmt:"LP",          art:"embers dark amber record sleeve roomful moody"},
+const WORKS = [
+  {code:"No.1", title:"Logo Design",        year:"2024", img:"./work1.png",
+   brief:"A visual identity created for Tonality Music Bar, exploring how music can be translated into a distinctive graphic language."},
+  {code:"No.2", title:"Wechat Editorial",   year:"2023", img:"./work2.png",
+   brief:"Editorial layouts and visual storytelling for a personal WeChat account — turning everyday stories into refined, long-form content."},
+  {code:"No.3", title:"Brand Promoting",    year:"2023", img:"./work3.jpg",
+   brief:"Cross-platform brand promotion content, shaping identity and tone across digital campaigns and touchpoints."},
+  {code:"No.4", title:"Film Explanation",   year:"2026", img:"./work4.png", thumb:true,
+   brief:"A film explanation piece that breaks cinematic language down into a clear, watchable visual narrative."},
 ];
 const ROSTER = [
   {
@@ -506,10 +602,8 @@ const DATES = [
 ];
 
 /* ============================================================
-   RENDER — roster + dates + deck cards
+   RENDER — roster + dates
    ============================================================ */
-const imgUrl = p => "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt="+encodeURIComponent(p+" film grain record label aesthetic")+"&image_size=square";
-
 (function renderStatic(){
   const rb = document.getElementById('roster-list');
   ROSTER.forEach(r=>{
@@ -537,124 +631,106 @@ const imgUrl = p => "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?pr
 })();
 
 /* ============================================================
-   DECK — physical throwable stack
+   WORK PIN — scroll-driven 3D floating work cards
    ============================================================ */
-const deckEl = document.getElementById('deck');
-const dotsEl = document.getElementById('dots');
-const counterEl = document.getElementById('counter');
-const THRESHOLD_RATIO = 0.08;   // 8% of deck width
-let cards = [];
-let topIndex = 0;
+(function workPin(){
+  const sec = document.getElementById('releases');
+  const scene = document.getElementById('wpScene');
+  const cap = document.getElementById('wpCaption');
+  const codeEl = document.getElementById('wpCode');
+  const titleEl = document.getElementById('wpTitle');
+  const briefEl = document.getElementById('wpBrief');
+  if(!sec || !scene) return;
+  const wpReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wpClamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+  const N = WORKS.length;
 
-function buildDeck(){
-  deckEl.innerHTML='';
-  dotsEl.innerHTML='';
-  cards = CATALOGUE.map((c,i)=>{
-    const el=document.createElement('article');
-    el.className='card';
-    el.setAttribute('aria-label', c.title+' — '+c.code);
-    el.innerHTML=`
-      <img class="art" alt="" src="${c.img ? c.img : imgUrl(c.art)}" loading="lazy" />
-      <div class="scrim"></div>
-      <div class="meta">
-        <div class="code">${c.code}</div>
-        <div class="title">${c.title}</div>
-        <div class="fmt">${c.fmt}</div>
-      </div>`;
-    deckEl.appendChild(el);
-    const dot=document.createElement('i');
-    dotsEl.appendChild(dot);
-    return el;
+  const cardEls = WORKS.map((w,i)=>{
+    const fig = document.createElement('figure');
+    fig.className = 'wp-card'+(w.thumb?' thumb':'');
+    fig.innerHTML = `<img src="${w.img}" alt="${w.title}" loading="lazy" />`;
+    scene.appendChild(fig);
+    return fig;
   });
-  // cards[0] is the top of the stack (highest z-index) — layoutStack handles the rest
-  layoutStack();
-  updateProgress();
-}
-function layoutStack(){
-  const N = cards.length;
-  cards.forEach((el,i)=>{
-    const off = i;                       // i=0 top
-    const tx = off*7;
-    const ty = -off*5;
-    const rot = off*1.4;
-    const sc = 1 - off*0.025;
-    el.style.transition='';
-    el.style.transform = `translate(${tx}px,${ty}px) rotate(${rot}deg) scale(${sc})`;
-    el.style.zIndex = N - off;
-    el.style.opacity = off===0 ? 1 : (1 - off*0.14);
-  });
-}
-function updateProgress(){
-  const dots = dotsEl.querySelectorAll('i');
-  dots.forEach((d,i)=>d.classList.toggle('on', i===topIndex));
-  counterEl.textContent = String(topIndex+1).padStart(2,'0')+' / '+String(cards.length).padStart(2,'0');
-}
 
-/* pointer / touch drag */
-let dragging=false, startX=0, curEl=null, deckW=0, pointerId=null;
+  let activeIdx = 0;
+  let capToken = 0;
+  codeEl.textContent = WORKS[0].code;
+  titleEl.textContent = WORKS[0].title;
+  briefEl.textContent = WORKS[0].brief;
 
-function onDown(e){
-  if(e.pointerType==='mouse' && e.button!==0) return;
-  const card = cards[0];
-  if(!card) return;
-  dragging=true; curEl=card; pointerId=e.pointerId;
-  startX=e.clientX;
-  deckW=deckEl.clientWidth;
-  card.classList.add('dragging');
-  card.style.transition='none';
-  try{ card.setPointerCapture(pointerId); }catch(_){}
-  e.preventDefault();
-}
-function onMove(e){
-  if(!dragging||!curEl) return;
-  const dx = e.clientX - startX;
-  const rot = dx*0.06;
-  const sc  = 1.04;
-  curEl.style.transform = `translate(${dx}px,-4px) rotate(${rot}deg) scale(${sc})`;
-}
-function onUp(e){
-  if(!dragging||!curEl) return;
-  dragging=false;
-  const dx = e.clientX - startX;
-  const dir = dx<0 ? -1 : 1;
-  curEl.classList.remove('dragging');
-  curEl.style.transition='';
-  try{ curEl.releasePointerCapture(pointerId); }catch(_){}
-  curEl=null; pointerId=null;
-  if(Math.abs(dx) > deckW*THRESHOLD_RATIO){
-    throwCard(dir);
-  } else {
-    layoutStack();
+  function setCaption(i){
+    if(i===activeIdx) return;
+    activeIdx = i;
+    const t = ++capToken;
+    cap.classList.add('switching');
+    setTimeout(()=>{
+      if(t!==capToken) return;               // a newer switch superseded this one
+      codeEl.textContent = WORKS[i].code;
+      titleEl.textContent = WORKS[i].title;
+      briefEl.textContent = WORKS[i].brief;
+      cap.classList.remove('switching');
+    },240);
   }
-}
-function throwCard(dir){
-  const card=cards[0];
-  if(!card) return;
-  const travel = deckW*1.25*dir;
-  card.style.transition='transform .55s cubic-bezier(.18,.9,.3,1), opacity .55s ease';
-  card.style.transform=`translate(${travel}px,-22px) rotate(${dir*32}deg) scale(1.06)`;
-  card.style.opacity='0';
-  // re-stack: move thrown card to bottom of stack after exit
-  setTimeout(()=>{
-    cards.push(cards.shift());
-    topIndex = (topIndex+1)%cards.length;
-    // reset the moved card's inline transform without transition
-    const moved=cards[cards.length-1];
-    moved.style.transition='none';
-    moved.style.opacity='';
-    layoutStack();
-    updateProgress();
-  },560);
-}
-deckEl.addEventListener('pointerdown', onDown);
-deckEl.addEventListener('pointermove', onMove);
-deckEl.addEventListener('pointerup', onUp);
-deckEl.addEventListener('pointercancel', onUp);
-deckEl.addEventListener('keydown', e=>{
-  if(e.key==='ArrowRight'){ throwCard(1); e.preventDefault(); }
-  else if(e.key==='ArrowLeft'){ throwCard(-1); e.preventDefault(); }
-});
-buildDeck();
+
+  // stepped one-at-a-time playback: p 0→1 walks card 1→N, then holds on N
+  function update(){
+    ticking = false;
+    const rect = sec.getBoundingClientRect();
+    const total = sec.offsetHeight - window.innerHeight;
+    const p = wpClamp(-rect.top/total, 0, 1);
+    const active = wpClamp(Math.floor(p*N), 0, N-1);
+
+    cardEls.forEach((el,i)=>{
+      let t;
+      if(i===active)      t = 'translate(-50%,-50%) scale(1)';
+      else if(i<active)  t = 'translate(-50%,-50%) translate(-14vw,0) scale(.92)';
+      else               t = 'translate(-50%,-50%) translate(14vw,0) scale(.92)';
+      el.style.transform = t;
+      el.style.opacity = i===active ? '1' : '0';
+      el.style.zIndex = i===active ? 3 : 1;
+    });
+
+    setCaption(active);
+  }
+
+  let ticking = false;
+  function onScroll(){
+    if(!ticking){ ticking = true; requestAnimationFrame(update); }
+  }
+
+  if(wpReduce){
+    // static: first work centered, rest hidden
+    cardEls.forEach((el,i)=>{
+      el.style.transform = i===0 ? 'translate(-50%,-50%) scale(1)' : 'translate(-50%,-50%)';
+      el.style.opacity = i===0 ? '1' : '0';
+    });
+  } else {
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    update();
+
+    // one-time intro for the first work when the section scrolls into view
+    let introDone = false;
+    function playIntro(){
+      if(introDone) return;
+      introDone = true;
+      const rect = sec.getBoundingClientRect();
+      const total = sec.offsetHeight - window.innerHeight;
+      const p = wpClamp(-rect.top/total, 0, 1);
+      if(p >= 1/N) return;                 // already past card 1: no intro
+      cardEls[0].animate(
+        [ {transform:'translate(-50%,-50%) translateY(34px) scale(.88)', opacity:0},
+          {transform:'translate(-50%,-50%) translateY(0) scale(1)',     opacity:1} ],
+        {duration:1100, easing:'cubic-bezier(.22,1,.36,1)', fill:'both'}
+      );
+    }
+    const io = new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting){ io.disconnect(); playIntro(); } });
+    },{threshold:0});
+    io.observe(sec);
+  }
+})();
 
 /* ============================================================
    PORTAL — scroll-driven, reversible
@@ -699,6 +775,10 @@ function updatePortal(){
   // scroll hint fades out as panels open / image reveals
   if(scrollHint) scrollHint.style.opacity = clamp(1 - p*1.6, 0, 1).toFixed(3);
 
+  // corner-tr appears after image reveals
+  const cornerTR = document.getElementById('corner-tr');
+  if(cornerTR) cornerTR.style.opacity = clamp((p-0.5)/0.2, 0, 1).toFixed(3);
+
   // accent dots: fade in early, travel to opposite corners
   const dotOp = clamp(p*2.2,0,1);
   dotL.style.opacity = dotOp;
@@ -712,6 +792,7 @@ function updatePortal(){
   // wordmark: scale up, tighten tracking, halves travel apart
   const scale = lerp(1,1.5,p);
   const track = lerp(-0.012,-0.035,p);
+  wm.style.opacity = '';
   wm.style.transform = `translateY(-50%) scale(${scale})`;
   wm.style.letterSpacing = `${track}em`;
   const sep = window.innerWidth*0.40*p;
