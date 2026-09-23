@@ -654,6 +654,8 @@ const DATES = [
   });
 
   let activeIdx = 0;
+  let introDone = false;
+  let introAnim = null;
   let capToken = 0;
   codeEl.textContent = WORKS[0].code;
   titleEl.textContent = WORKS[0].title;
@@ -681,13 +683,17 @@ const DATES = [
     const p = wpClamp(-rect.top/total, 0, 1);
     const active = wpClamp(Math.floor(p*N), 0, N-1);
 
+    // scrolled past card 1 during the intro animation: abort it
+    if(introAnim && active!==0){ introAnim.cancel(); introAnim=null; }
+
     cardEls.forEach((el,i)=>{
       let t;
       if(i===active)      t = 'translate(-50%,-50%) scale(1)';
       else if(i<active)  t = 'translate(-50%,-50%) translate(-14vw,0) scale(.92)';
       else               t = 'translate(-50%,-50%) translate(14vw,0) scale(.92)';
       el.style.transform = t;
-      el.style.opacity = i===active ? '1' : '0';
+      // first card stays invisible until its one-time fade-in intro plays
+      el.style.opacity = (i===active && (i!==0 || introDone)) ? '1' : '0';
       el.style.zIndex = i===active ? 3 : 1;
     });
 
@@ -710,25 +716,36 @@ const DATES = [
     window.addEventListener('resize', onScroll);
     update();
 
-    // one-time intro for the first work when the section scrolls into view
-    let introDone = false;
-    function playIntro(){
-      if(introDone) return;
-      introDone = true;
+    // one-time intro: first card fades in from nothing once the stage pins
+    function progress(){
       const rect = sec.getBoundingClientRect();
       const total = sec.offsetHeight - window.innerHeight;
-      const p = wpClamp(-rect.top/total, 0, 1);
-      if(p >= 1/N) return;                 // already past card 1: no intro
-      cardEls[0].animate(
-        [ {transform:'translate(-50%,-50%) translateY(34px) scale(.88)', opacity:0},
-          {transform:'translate(-50%,-50%) translateY(0) scale(1)',     opacity:1} ],
-        {duration:1100, easing:'cubic-bezier(.22,1,.36,1)', fill:'both'}
-      );
+      return {rect, p:wpClamp(-rect.top/total, 0, 1)};
     }
-    const io = new IntersectionObserver(es=>{
-      es.forEach(e=>{ if(e.isIntersecting){ io.disconnect(); playIntro(); } });
-    },{threshold:0});
-    io.observe(sec);
+    function maybeIntro(){
+      if(introDone) return;
+      const {rect, p} = progress();
+      if(p >= 1/N){                        // fast-scrolled past card 1: show instantly
+        introDone = true;
+        cardEls[0].getAnimations().forEach(a=>a.cancel());
+        cardEls[0].style.opacity = '1';
+        update();
+        return;
+      }
+      if(rect.top <= window.innerHeight*0.25){
+        introDone = true;
+        introAnim = cardEls[0].animate(
+          [ {opacity:0, transform:'translate(-50%,-50%) scale(.96)'},
+            {opacity:1, transform:'translate(-50%,-50%) scale(1)'} ],
+          {duration:1000, easing:'cubic-bezier(.22,1,.36,1)', fill:'both'}
+        );
+        introAnim.onfinish = ()=>{ introAnim.cancel(); introAnim=null; update(); };
+      }
+    }
+    window.addEventListener('scroll', ()=>{
+      if(!introDone) requestAnimationFrame(maybeIntro);
+    }, {passive:true});
+    maybeIntro();
   }
 })();
 
